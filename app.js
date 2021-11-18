@@ -18,9 +18,7 @@ const getAllTours = (req, res) => {
   });
 };
 
-app.get('/api/v1/tours', getAllTours);
-
-app.get('/api/v1/tours/:id', (req, res) => {
+const getTourByID = (req, res) => {
   const id = req.params.id * 1;
   const tour = tours.find((el) => el.id === id);
 
@@ -35,9 +33,9 @@ app.get('/api/v1/tours/:id', (req, res) => {
     status: 'success',
     data: tour,
   });
-});
+};
 
-app.post('/api/v1/tours', (req, res) => {
+const createTour = (req, res) => {
   const newID = tours[tours.length - 1].id + 1;
   const newTour = Object.assign({ id: newID }, req.body);
 
@@ -54,23 +52,15 @@ app.post('/api/v1/tours', (req, res) => {
       });
     }
   );
-});
+};
 
-app.patch('/api/v1/tours/:id', (req, res) => {
-  if (req.params.id * 1 >= tours.length) {
-    return res.status(404).json({
-      status: 'fail',
-      message: 'Invalid ID',
-    });
-  }
+app.get('/api/v1/tours', getAllTours);
 
-  res.status(200).json({
-    status: 'success',
-    data: {
-      tour: '<Updated tour here>...',
-    },
-  });
-});
+app.get('/api/v1/tours/:id', getTourByID);
+
+app.post('/api/v1/tours', createTour);
+
+app.patch('/api/v1/tours/:id', updateTourByID);
 
 app.delete('/api/v1/tours/:id', (req, res) => {
   if (req.params.id * 1 >= tours.length) {
