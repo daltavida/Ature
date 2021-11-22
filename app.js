@@ -1,7 +1,10 @@
 const express = require('express');
 const fs = require('fs');
+const morgan = require('morgan');
 
 const app = express();
+
+app.use(morgan('dev'));
 app.use(express.json());
 
 const tours = JSON.parse(
@@ -84,12 +87,31 @@ const deleteTourByID = (req, res) => {
   });
 };
 
+const getAllUsers = (req, res) => {};
+
+const createUser = (req, res) => {};
+
+const getUserByID = (req, res) => {};
+
+const updateUserByID = (req, res) => {};
+
+const deleteUserByID = (req, res) => {};
+
 app.route('/api/v1/tours').get(getAllTours).post(createTour);
+
 app
   .route('/api/v1/tours/:id')
   .get(getTourByID)
   .patch(updateTourByID)
   .delete(deleteTourByID);
+
+app.route('/api/v1/users').get(getAllUsers).post(createUser);
+
+app
+  .route('/api/v1/users/:id')
+  .get(getUserByID)
+  .patch(updateUserByID)
+  .delete(deleteUserByID);
 
 const port = 3000;
 app.listen(port, '127.0.0.1', () => {
