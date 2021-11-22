@@ -87,15 +87,40 @@ const deleteTourByID = (req, res) => {
   });
 };
 
-const getAllUsers = (req, res) => {};
+const getAllUsers = (req, res) => {
+  res.status(500).json({
+    status: 'err',
+    message: 'This route is currently not supported',
+  });
+};
 
-const createUser = (req, res) => {};
+const createUser = (req, res) => {
+  res.status(500).json({
+    status: 'err',
+    message: 'This route is currently not supported',
+  });
+};
 
-const getUserByID = (req, res) => {};
+const getUserByID = (req, res) => {
+  res.status(500).json({
+    status: 'err',
+    message: 'This route is currently not supported',
+  });
+};
 
-const updateUserByID = (req, res) => {};
+const updateUserByID = (req, res) => {
+  res.status(500).json({
+    status: 'err',
+    message: 'This route is currently not supported',
+  });
+};
 
-const deleteUserByID = (req, res) => {};
+const deleteUserByID = (req, res) => {
+  res.status(500).json({
+    status: 'err',
+    message: 'This route is currently not supported',
+  });
+};
 
 app.route('/api/v1/tours').get(getAllTours).post(createTour);
 
