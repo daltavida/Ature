@@ -122,10 +122,13 @@ const deleteUserByID = (req, res) => {
   });
 };
 
-app.route('/api/v1/tours').get(getAllTours).post(createTour);
+app.use('/api/v1/tours', toursRouter);
+const toursRouter = express.Router();
 
-app
-  .route('/api/v1/tours/:id')
+toursRouter.route('/').get(getAllTours).post(createTour);
+
+toursRouter
+  .route('/:id')
   .get(getTourByID)
   .patch(updateTourByID)
   .delete(deleteTourByID);
