@@ -4,7 +4,7 @@
   "description": "A website for tours into the nature",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon -L server.js"
   },
   "author": "Ajay Singh",
   "license": "ISC",
