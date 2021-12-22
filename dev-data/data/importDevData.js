@@ -17,9 +17,11 @@ mongoose
     console.log('Connected to database');
   });
 
-const tours = JSON.parse(fs.readFileSync('tours-simple.json', 'utf-8'));
+const tours = JSON.parse(
+  fs.readFileSync(`${__dirname}/tours-simple.json`, 'utf-8')
+);
 
-const importDate = async () => {
+const importData = async () => {
   try {
     await Tour.create(tours);
     console.log('Data successfully loaded');
@@ -36,3 +38,9 @@ const deleteData = async () => {
     console.log(err);
   }
 };
+
+if (process.argv[2] === '--import') {
+  importData();
+} else if (process.argv[2] === '--delete') {
+  deleteData();
+}
