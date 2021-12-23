@@ -25,20 +25,20 @@ const importData = async () => {
   try {
     await Tour.create(tours);
     console.log('Data successfully loaded');
-    process.exit();
   } catch (err) {
     console.log(err);
   }
+  process.exit();
 };
 
 const deleteData = async () => {
   try {
     await Tour.deleteMany();
     console.log('Data successfully deleted');
-    process.exit();
   } catch (err) {
     console.log(err);
   }
+  process.exit();
 };
 
 if (process.argv[2] === '--import') {
