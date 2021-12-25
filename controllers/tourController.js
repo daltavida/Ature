@@ -7,7 +7,8 @@ exports.getAllTours = async (req, res) => {
 
     excludedFields.forEach((el) => delete queryObject[el]);
 
-    const tours = await Tour.find(req.query);
+    const query = await Tour.find(queryObject);
+    const tours = await query;
 
     res.status(200).json({
       status: 'success',
