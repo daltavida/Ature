@@ -24,6 +24,8 @@ exports.getAllTours = async (req, res) => {
     if (req.query.fields) {
       const fields = req.query.fields.split(',').join(' ');
       query = query.select(fields);
+    } else {
+      query = query.select('-__v');
     }
 
     const tours = await query;
