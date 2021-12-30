@@ -7,6 +7,10 @@ exports.aliasFeatured = (req, res, next) => {
   next();
 };
 
+class APIFeatures {
+  constructor()
+}
+
 exports.getAllTours = async (req, res) => {
   try {
     const queryObject = { ...req.query };
