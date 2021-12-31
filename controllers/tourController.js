@@ -56,11 +56,6 @@ class APIFeatures {
     const skip = (page - 1) * limit;
 
     this.query = this.query.skip(skip).limit(limit);
-
-    if (req.query.page) {
-      const numTours = await Tour.countDocuments();
-      if (skip > numTours) throw new Error('This page does not exist');
-    }
     return this;
   }
 }
