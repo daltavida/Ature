@@ -62,8 +62,8 @@ class APIFeatures {
 
 exports.getAllTours = async (req, res) => {
   try {
-    const features = APIFeatures(Tour.find(), req.query);
-    features.filter().sort();
+    const features = new APIFeatures(Tour.find(), req.query);
+    features.filter().sort().limit().paginate();
 
     const tours = await features.query;
 
