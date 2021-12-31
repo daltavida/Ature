@@ -25,18 +25,24 @@ class APIFeatures {
     );
 
     this.query.find(queryStr);
+
+    return this;
+  }
+
+  sort() {
+    if (this.queryString.sort) {
+      const sortBy = this.queryString.sort.split(',').join(' ');
+      this.query = this.query.sort(sortBy);
+    } else {
+      this.query = this.query.sort('-createdAt');
+    }
+
+    return this;
   }
 }
 
 exports.getAllTours = async (req, res) => {
   try {
-    if (req.query.sort) {
-      const sortBy = req.query.sort.split(',').join(' ');
-      query = query.sort(sortBy);
-    } else {
-      query = query.sort('-createdAt');
-    }
-
     if (req.query.fields) {
       const fields = req.query.fields.split(',').join(' ');
       query = query.select(fields);
@@ -55,8 +61,10 @@ exports.getAllTours = async (req, res) => {
       if (skip > numTours) throw new Error('This page does not exist');
     }
 
-    const features = APIFeatures();
-    const tours = await query;
+    const features = APIFeatures(Tour.find(), req.query);
+    features.filter().sort();
+
+    const tours = await features.query;
 
     res.status(200).json({
       status: 'success',
