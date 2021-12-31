@@ -8,12 +8,13 @@ exports.aliasFeatured = (req, res, next) => {
 };
 
 class APIFeatures {
-  constructor()
-}
+  constructor(query, queryString) {
+    this.query = query;
+    this.queryString = queryString;
+  }
 
-exports.getAllTours = async (req, res) => {
-  try {
-    const queryObject = { ...req.query };
+  filter() {
+    const queryObject = { ...this.queryString };
     const excludedFields = ['page', 'sort', 'limit', 'fields'];
 
     excludedFields.forEach((el) => delete queryObject[el]);
@@ -23,8 +24,12 @@ exports.getAllTours = async (req, res) => {
       queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`)
     );
 
-    let query = Tour.find(queryStr);
+    this.query.find(queryStr);
+  }
+}
 
+exports.getAllTours = async (req, res) => {
+  try {
     if (req.query.sort) {
       const sortBy = req.query.sort.split(',').join(' ');
       query = query.sort(sortBy);
@@ -50,6 +55,7 @@ exports.getAllTours = async (req, res) => {
       if (skip > numTours) throw new Error('This page does not exist');
     }
 
+    const features = APIFeatures();
     const tours = await query;
 
     res.status(200).json({
