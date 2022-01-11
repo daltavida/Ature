@@ -54,6 +54,10 @@ const tourSchema = new mongoose.Schema(
     },
     startDates: [Date],
     slug: String,
+    secretTour: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     toJSON: { virtuals: true },
