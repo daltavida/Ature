@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "dev": "nodemon -L server.js",
-    "start": "NODE_ENV=production nodemon -L server.js"
+    "start": "NODE_ENV=production nodemon -L server.js",
+    "debug": "ndb server.js"
   },
   "author": "Ajay Singh",
   "license": "ISC",
