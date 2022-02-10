@@ -9,7 +9,7 @@ exports.aliasFeatured = (req, res, next) => {
   next();
 };
 
-exports.getAllTours = catchAsync(async (req, res) => {
+exports.getAllTours = catchAsync(async (req, res, next) => {
   const features = new APIFeatures(Tour.find(), req.query);
   features.filter().sort().limit().paginate();
 
@@ -24,7 +24,7 @@ exports.getAllTours = catchAsync(async (req, res) => {
   });
 });
 
-exports.getTourByID = catchAsync(async (req, res) => {
+exports.getTourByID = catchAsync(async (req, res, next) => {
   const tour = await Tour.findById(req.params.id);
 
   res.status(200).json({
@@ -33,7 +33,7 @@ exports.getTourByID = catchAsync(async (req, res) => {
   });
 });
 
-exports.createTour = catchAsync(async (req, res) => {
+exports.createTour = catchAsync(async (req, res, next) => {
   const newTour = await Tour.create(req.body);
 
   res.status(201).json({
@@ -44,7 +44,7 @@ exports.createTour = catchAsync(async (req, res) => {
   });
 });
 
-exports.updateTourByID = catchAsync(async (req, res) => {
+exports.updateTourByID = catchAsync(async (req, res, next) => {
   const tour = await Tour.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
@@ -58,7 +58,7 @@ exports.updateTourByID = catchAsync(async (req, res) => {
   });
 });
 
-exports.deleteTourByID = catchAsync(async (req, res) => {
+exports.deleteTourByID = catchAsync(async (req, res, next) => {
   await Tour.findByIdAndDelete(req.params.id);
 
   res.status(204).json({
@@ -67,7 +67,7 @@ exports.deleteTourByID = catchAsync(async (req, res) => {
   });
 });
 
-exports.getTourStats = catchAsync(async (req, res) => {
+exports.getTourStats = catchAsync(async (req, res, next) => {
   const stats = await Tour.aggregate([
     {
       $match: {
@@ -113,7 +113,7 @@ exports.getTourStats = catchAsync(async (req, res) => {
   });
 });
 
-exports.getMonthlyPlan = catchAsync(async (req, res) => {
+exports.getMonthlyPlan = catchAsync(async (req, res, next) => {
   const year = req.params.year * 1;
   const plan = await Tour.aggregate([
     {
