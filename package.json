@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "dev": "nodemon -L server.js",
-    "start": "NODE_ENV=production nodemon -L server.js",
+    "start": "cross-env NODE_ENV=production nodemon -L server.js",
     "debug": "ndb server.js"
   },
   "author": "Ajay Singh",
@@ -19,6 +19,7 @@
     "validator": "^13.7.0"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "eslint": "^8.9.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.3.0",
