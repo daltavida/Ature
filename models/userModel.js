@@ -24,3 +24,7 @@ const userSchema = new mongoose.Schema({
     required: [true, 'Every user requires a password'],
   },
 });
+
+const User = mongoose.model('User', userSchema);
+
+module.exports = User;
