@@ -31,6 +31,8 @@ exports.login = catchAsync(async (req, res, next) => {
     return next(new AppError('Please provide email and password', 400));
   }
 
+  const user = User.findOne({ email });
+
   const token = '';
   res.status(200).json({
     status: 'success',
