@@ -28,7 +28,7 @@ exports.login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    next(new AppError('Please provide email and password', 400));
+    return next(new AppError('Please provide email and password', 400));
   }
 
   const token = '';
