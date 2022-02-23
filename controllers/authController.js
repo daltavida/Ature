@@ -34,6 +34,12 @@ exports.login = catchAsync(async (req, res, next) => {
 
   const user = await User.findOne({ email }).select('+password');
 
+  if (!user) {
+    return next(new AppError('No user found with that email', 400));
+  }
+
+  const correct = user.correctPassword(password, user.password);
+
   const token = '';
   res.status(200).json({
     status: 'success',
