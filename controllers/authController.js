@@ -4,7 +4,7 @@ const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
 const signToken = (id) =>
-  jwt.sign({ id: id }, process.env.JWT_SECRET, {
+  jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
 
@@ -40,7 +40,7 @@ exports.login = catchAsync(async (req, res, next) => {
     return next(new AppError('Incorrect email or password', 401));
   }
 
-  const token = '';
+  const token = signToken(user._id);
   res.status(200).json({
     status: 'success',
     token,
