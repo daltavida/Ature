@@ -68,7 +68,9 @@ exports.protect = catchAsync(async (req, res, next) => {
     return next(new AppError('The user no longer exists', 401));
   }
 
-  freshUser.changedPasswordAfter(decoded.iat);
+  if (freshUser.changedPasswordAfter(decoded.iat)) {
+    return next(new AppError('Recently changed password, Login again'), 401);
+  }
 
   next();
 });
