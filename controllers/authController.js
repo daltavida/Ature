@@ -63,15 +63,15 @@ exports.protect = catchAsync(async (req, res, next) => {
 
   const decoded = await promisify(jwt.verify(token, process.env.JWT_SECRET));
 
-  const freshUser = await User.findById(decoded.id);
-  if (!freshUser) {
+  const currentUser = await User.findById(decoded.id);
+  if (!currentUser) {
     return next(new AppError('The user no longer exists', 401));
   }
 
-  if (freshUser.changedPasswordAfter(decoded.iat)) {
+  if (currentUser.changedPasswordAfter(decoded.iat)) {
     return next(new AppError('Recently changed password, Login again'), 401);
   }
 
-  req.user = freshUser;
+  req.user = currentUser;
   next();
 });

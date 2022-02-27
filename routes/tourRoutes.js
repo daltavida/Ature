@@ -21,6 +21,6 @@ router
   .route('/:id')
   .get(tourController.getTourByID)
   .patch(tourController.updateTourByID)
-  .delete(tourController.deleteTourByID);
+  .delete(authController.protect, tourController.deleteTourByID);
 
 module.exports = router;
