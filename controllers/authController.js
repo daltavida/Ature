@@ -87,3 +87,7 @@ exports.restrictTo =
 
     next();
   };
+
+exports.forgotPassword = (req, res, next) => {};
+
+exports.resetPassword = (req, res, next) => {};
